@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 
 # project specific
-data/*.db
-data/*.json
+data/*
+!data/*.sql
 .swp
 .idea/

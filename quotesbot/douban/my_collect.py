@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from scrapy.selector import Selector
-# import txt
 
 domaindb = 'https://movie.douban.com'
 
@@ -15,7 +13,7 @@ def getArr(tagstr):
 
 
 class ToScrapeSpiderXPath(scrapy.Spider):
-    name = 'douban-my-collect'
+    name = 'douban_my_collect'
     start_urls = [
         domaindb + '/people/sugae/collect' #+ pg_num
     ]

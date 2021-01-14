@@ -1,19 +1,9 @@
 # import json to sqlite db
 
-import sys
 import sqlite3
 from sqlite3 import Error
 import os
-import json
-
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-
-def open_json(table_name):
-    with open(os.path.join(dir_path, table_name + '.json')) as json_file:
-        data = json.load(json_file)
-    return data
+import helper
 
 
 def get_split_arr(tagstr):
@@ -41,7 +31,7 @@ def insert_table(db, table_name, data):
     ''')
 
     values = []
-    for p in data:#[:1]:
+    for p in data:  # [:1]:
         titles = p['titles']
         titles.reverse()
         link = p['link']
@@ -88,17 +78,48 @@ def create_table(db, table_name):
     sql_create = f''' 
 CREATE TABLE "{table_name}" (
     id varchar(255) primary key,
-    image varchar(255),
-    title varchar(255),
-    title_cn varchar(255),
-    url varchar(255),
-    release_date DATE,
-    release_region varchar(255),
-    mark float,
-    mark_date DATE,
+    image varchar(255), -- '海报',
+    title varchar(255), -- '标题',
+    title_cn varchar(255), -- '标题中文翻译',
+    url varchar(255), -- '豆瓣详情页地址',
+
+    directors varchar(255), --  '导演' from table celebrities
+    writers varchar(255), -- '编剧' from table celebrities
+    actors varchar(255), -- '演员' from table celebrities
+
+    tags varchar(255), -- 动画 / 奇幻 / 冒险
+    tags_user varchar(255), -- 动画 / 奇幻 / 冒险
+    website varchar(255), -- 官方网站
+    region varchar(255), -- 制片国家/地区: 日本
+    language varchar(255), -- 语言
+    release_date DATE, -- '首播时间',
+    release_region varchar(255), -- '首播地点',
+    episodes int, --集数: 13
+    duration varchar(255), --单集片长: 28分钟
+    imdb var char(255), -- IMDb链接: tt10112240
+
+    rating_avg float,
+    rating_num int,
+    rating_5 float,
+    rating_4 float,
+    rating_3 float,
+    rating_2 float,
+    rating_1 float,
+ 
+    mark float, -- '我的豆瓣评分',
+    mark_date DATE, -- '我的豆瓣评分日期',
+    mark_comment var(1000), -- 短评
+
+    cate_id int,
+    cate_name varchar(255),
+    recommendations varchar(500), -- id join
+    short_count int, -- 短评数
+    long_count int, -- 影评数
+     
     last_update timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP 
 );
 '''
+
     db.execute(sql_create)
 
 
@@ -106,7 +127,7 @@ def create_connection():
     """ create a database connection to a SQLite database """
     conn = None
     try:
-        conn = sqlite3.connect(os.path.join(dir_path, 'quotesbot.db'))
+        conn = sqlite3.connect(os.path.join(helper.proj_dir, 'data', 'quotesbot.db'))
         print(sqlite3.version)
     except Error as e:
         print(e)
@@ -123,9 +144,9 @@ def close_connection(conn):
 
 def main(table_name):
     db = create_connection()
-    # create_table(db, table_name)  # once
-    data = open_json(table_name)
-    insert_table(db, table_name, data)
+    create_table(db, table_name)  # once
+    # data = helper.read_json(table_name)
+    # insert_table(db, table_name, data)
     close_connection(db)
 
 
@@ -135,4 +156,4 @@ if __name__ == '__main__':
     #     print('usage: python dbHelper.py tablename')
     # else:
     #     house = args[1]
-        main('my-collect')
+    main('my_collect')
