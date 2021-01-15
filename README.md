@@ -11,13 +11,8 @@ Get my douban collect list data.
 
 Data first saved in JSON then in sqlite database.
 
-Current execute order is:
+To restort the database, execute `create_db.py` in data folder:
 
-0. createTables.sql
-1. insert_movie_detail_api.py
-2. insert_movie_detail_ranking_api.py
-3. insert_movie_detail_credits_api.py
-4. insert_my_collect_api.py
 
 ## Useful commands
 

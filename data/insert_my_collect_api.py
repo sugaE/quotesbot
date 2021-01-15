@@ -109,14 +109,9 @@ def insert_my_collect(db, data):
     db.commit()
 
 
-def insert_my_collect(db, data):
-    print('my_collcet')
-
-
 def main():
     db = db_helper.create_connection()
     data = helper.read_json('movie_detail_api')
-    insert_my_collect(db, data)
     db_helper.close_connection(db)
 
 

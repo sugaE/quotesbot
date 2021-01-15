@@ -90,6 +90,6 @@ ENV/
 
 # project specific
 data/*.db
-data/*.csv 
+data/*.csv
 .swp
 .idea/

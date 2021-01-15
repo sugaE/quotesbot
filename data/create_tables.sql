@@ -1,5 +1,6 @@
+--CREATE DATABASE quotesbot;
 
-DROP TABLE IF EXISTS "movies";
+--DROP TABLE IF EXISTS "movies";
 CREATE TABLE "movies" (
     id varchar(255) UNIQUE primary key,
     cover_url varchar(255), -- '海报',
@@ -57,7 +58,7 @@ CREATE TABLE "movies" (
 );
 
 
-DROP TABLE IF EXISTS "my_collect";
+--DROP TABLE IF EXISTS "my_collect";
 CREATE TABLE "my_collect" (
     id varchar(255) UNIQUE primary key,
     movie_id varchar(255),
@@ -81,7 +82,7 @@ CREATE TABLE "my_collect" (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 
-DROP TABLE IF EXISTS "movie_alias";
+--DROP TABLE IF EXISTS "movie_alias";
 CREATE TABLE "movie_alias" (
 	"movie_id"	varchar(255) NOT NULL,
 	"alia"	varchar(255) NOT NULL,
@@ -90,13 +91,13 @@ CREATE TABLE "movie_alias" (
 );
 
 
-DROP TABLE IF EXISTS "tags";
+--DROP TABLE IF EXISTS "tags";
 CREATE TABLE "tags" (
     id varchar(255) UNIQUE primary key ,
     name varchar(255)
 )
 
-DROP TABLE IF EXISTS "celebrities";
+--DROP TABLE IF EXISTS "celebrities";
 CREATE TABLE "celebrities" (
     id varchar(255) UNIQUE primary key, -- primary key,
     name varchar(255), -- '全名',
@@ -110,7 +111,7 @@ CREATE TABLE "celebrities" (
 );
 
 
-DROP TABLE IF EXISTS "movie_celebrities";
+--DROP TABLE IF EXISTS "movie_celebrities";
 CREATE TABLE "movie_celebrities" (
 	"movie_id"	varchar(255),
 	"celebrity_id"	varchar(255),
