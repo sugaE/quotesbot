@@ -1,43 +1,35 @@
 # QuotesBot
-This is a Scrapy project to scrape quotes from famous people from http://quotes.toscrape.com ([github repo](https://github.com/scrapinghub/spidyquotes)).
+Get my douban collect list data.
 
-This project is only meant for educational purposes.
-
+## Folders
+- data: store data
+- helper: utils
+- mock: localized website data for debug use.
+- quotesbot: crawlers 
 
 ## Extracted data
 
-This project extracts quotes, combined with the respective author names and tags.
-The extracted data looks like this sample:
+Data first saved in JSON then in sqlite database.
 
-    {
-        'author': 'Douglas Adams',
-        'text': '“I may not have gone where I intended to go, but I think I ...”',
-        'tags': ['life', 'navigation']
-    }
+Current execute order is:
 
+0. createTables.sql
+1. insert_movie_detail_api.py
+2. insert_movie_detail_ranking_api.py
+3. insert_movie_detail_credits_api.py
+4. insert_my_collect_api.py
 
-## Spiders
+## Useful commands
 
-This project contains two spiders and you can list them using the `list`
-command:
+```shell script
+# list all the scrapy available
+scrapy list 
 
-    $ scrapy list
-    toscrape-css
-    toscrape-xpath
-
-Both spiders extract the same data from the same website, but `toscrape-css`
-employs CSS selectors, while `toscrape-xpath` employs XPath expressions.
-
-You can learn more about the spiders by going through the
-[Scrapy Tutorial](http://doc.scrapy.org/en/latest/intro/tutorial.html).
+# execute and output
+scrapy crawl toscrape-css -o quotes.json
+```
 
 
-## Running the spiders
+## Useful links
+[Scrapy Tutorial](http://doc.scrapy.org/en/latest/intro/tutorial.html)
 
-You can run a spider using the `scrapy crawl` command, such as:
-
-    $ scrapy crawl toscrape-css
-
-If you want to save the scraped data to a file, you can pass the `-o` option:
-    
-    $ scrapy crawl toscrape-css -o quotes.json
