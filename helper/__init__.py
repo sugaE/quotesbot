@@ -4,6 +4,7 @@
 import os
 import json
 
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 proj_dir = os.path.join(dir_path, '..')
 

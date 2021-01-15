@@ -20,7 +20,7 @@ class ToScrapeMovieDetailApi(scrapy.Spider):
 
     def start_requests(self):
         for x in get_start_ids():
-            yield Request(f'https://m.douban.com/rexxar/api/v2/tv/{x}/rating?ck=lvDn&for_mobile=1',
+            yield Request(f'https://m.douban.com/rexxar/api/v2/{x["type"]}/{x["id"]}/rating?ck=lvDn&for_mobile=1',
                           cookies=helper.cookies,
                           meta=dict(x=x)
                           )
